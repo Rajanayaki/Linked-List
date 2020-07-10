@@ -1,45 +1,43 @@
 class node:
-  def  __init__(self,data):
+  def __init__(self,data):
     self.data=data
     self.next=None
-
 class linkedlist:
-  
   def __init__(self):
     self.head=None
-  
-  def push(self,data):
+  def insert(self,data):
     newnode=node(data)
-    if self.head is None:
+    if self.head==None:
       self.head=newnode
     else:
       temp=self.head
       while(temp.next!=None):
         temp=temp.next
       temp.next=newnode
-
-  def middle(self):
-    fast=self.head
-    slow=self.head
-    prev=None
-    while(fast is not None and fast.next.next is not None):
-      fast=fast.next.next
-      prev=slow
-      slow=slow.next
-    prev.next=slow.next
-  
+  def dups(self):
+    curr=self.head
+    nextnode=curr
+    while(curr!=None and curr.next!=None):
+     
+      while(nextnode.next!=None):
+        if curr.data==nextnode.next.data:
+          nextnode.next=nextnode.next.next
+        else:
+          nextnode=nextnode.next 
+      curr=curr.next
+      nextnode=curr
   def printlist(self):
-    temp=self.head
-    while(temp.next.next!=None):
-      print(temp.data,end=" ")
-      temp=temp.next
-    print(temp.data,temp.next.data)
-    
-ll=linkedlist()
+    curr=self.head
+    while(curr.next!=None):
+      print(curr.data)
+      curr=curr.next
+    print(curr.data)
+
+ll= linkedlist()
 size=int(input())
 elements=list(map(int,input().split()))
-for i in range(size):
-  ll.push(elements[i])
+for i in elements:
+  ll.insert(i) 
+ll.dups()
 ll.printlist()
-ll.middle()
-ll.printlist()
+
